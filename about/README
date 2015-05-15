@@ -1,3 +1,126 @@
 https://wiki.jasig.org/display/CASUM/Maintaining+local+customizations+using+Maven+2
 
 mvn -e -Dmaven.test.skip=true package install
+
+https://wiki.jasig.org/display/CASUM/Maintaining+local+customizations+using+Maven+2
+
+Background 
+This page is created in order to let users share how to maintain local customizations using Maven 2. Those customizations include:
+
+   * changing properties in deploymentConfigContext.xml, cas-servlet.xml, etc.;
+   * adding customized views and themes;
+   * your own classes of Authentication Handlers, principles or special web flow elements;
+   * and any other things you need.
+
+Aim
+By using Maven 2, we aim to perform the following:
+
+   * Easier to extend and customize CAS server for your need
+   * Less Pain in transiting to new CAS versions, by running maven
+
+Assumptions
+This HOW TO makes the following assumptions:
+
+   * CAS 3.1.0 or greater
+   * You know how to customize CAS, including adding classes and other web application resources
+   * You know the basics of Maven 2, read the Maven in 5 minutes introduction.
+
+Possible Solutions1. cas-webapp overlay
+First of all, create a directory where you will put your own customized files and where you will compile:
+
+cd cas-server-3.1.1
+mkdir cas-server-xxx
+Then create a pom.xml file like this in your new directory:
+
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.xxx.cas</groupId>
+    <artifactId>xxx-cas</artifactId>
+    <version>1.4-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>XXX CAS webapp</name>
+    <organization>
+        <name>XXX</name>
+        <url>http://www.xxx.fr</url>
+    </organization>
+    <description>The XXX's customizations to the JA-SIG CAS server.</description>
+    <dependencies>
+        <dependency>
+            <groupId>org.jasig.cas</groupId>
+            <artifactId>cas-server-webapp</artifactId>
+            <version>3.1.1</version>
+            <type>war</type>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.jasig.cas</groupId>
+            <artifactId>cas-server-core</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+ 
+        <!-- if you need LDAP handler -->
+        <dependency>
+            <groupId>org.jasig.cas</groupId>
+            <artifactId>cas-server-support-ldap</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+ 
+        <!-- if you need X509 handler -->
+        <dependency>
+            <groupId>org.jasig.cas</groupId>
+            <artifactId>cas-server-support-x509</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+ 
+      </dependencies>
+    <build>
+        <finalName>cas</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>RELEASE</version>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <repositories>
+        <repository>
+            <id>jasig-repository</id>
+            <name>JA-SIG Maven2 Repository</name>
+            <url>http://developer.ja-sig.org/maven2</url>
+        </repository>
+    </repositories>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-changelog-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
+</project>
+Replace XXX by your organisation name and remove the X509 or the LDAP lines if you don't need these handlers.
+Now you can put your own customized files in cas-server-3.1.1/cas-server-xxx/src/. For example if you want to overload the X509 handler sourcecode, create this file:
+
+cas-server-xxx/src/main/java/X509CredentialsAuthenticationHandler.java
+
+Then you just have to compile your project:
+
+cd cas-server-3.1.1/cas-server-xxx/
+mvn -Dmaven.test.skip=true package install
+The war will be available in cas-server-3.1.1/cas-server-xxx/target/cas.war
+Another way that is not explained above that need to be explained is: Install the cas.war into local repository. Build your own customization project using Maven 2, include the cas.war as a dependency

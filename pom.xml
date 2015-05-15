@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>hh.hunnyhu.cas</groupId>
-    <artifactId>xxx-cas</artifactId>
+    <artifactId>hunnyhu-cas</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>HunnyHu CAS Server webapp</name>
@@ -74,14 +74,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.8</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changelog-plugin</artifactId>
+                <version>2.3</version>
             </plugin>
         </plugins>
     </reporting>
