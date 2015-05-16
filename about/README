@@ -135,3 +135,98 @@ Build your own customization project using Maven 2, include the cas.war as a dep
 ico generate address: http://www.favicon.cc/
 
 ============================================================================
+3. 【SSO-CAS】Change CAS https credentials authentication to http.
+CAS Server Change:
+(1) ticketGrantingTicketCookieGenerator.xml p:cookieSecure="true" to p:cookieSecure="false".
+(2) warnCookieGenerator.xml p:cookieSecure="true" to p:cookieSecure="false".
+(3) deployerConfigContext.xml
+	<bean class="org.jasig.cas.authentication.handler.support.HttpBasedServiceCredentialsAuthenticationHandler"  
+          p:httpClient-ref="httpClient" />
+    to:
+    <bean id="proxyAuthenticationHandler"
+          class="org.jasig.cas.authentication.handler.support.HttpBasedServiceCredentialsAuthenticationHandler"
+          p:httpClient-ref="httpClient" 
+          p:requireSecure="false" /> 
+CAS Client Change:
+修改客户端的https验证 
+(1).edu.yale.its.tp.cas.client.filter
+把这两段内容注释掉
+if (! casValidate.startsWith("https://")){   
+            throw new ServletException("validateUrl must start with https://, its current value is [" + casValidate + "]");   
+        }   
+if (casServiceUrl != null){   
+            if (! (casServiceUrl.startsWith("https://")|| (casServiceUrl.startsWith("http://") ))){   
+                throw new ServletException("service URL must start with http:// or https://; its current value is [" + casServiceUrl + "]");   
+            }   
+        }  
+(2).修改edu.yale.its.tp.cas.util.SecureURL 
+把这段内容注释掉
+if (!u.getProtocol().equals("https")){   
+                // IOException may not be the best exception we could throw here   
+                // since the problem is with the URL argument we were passed, not   
+                // IO. -awp9   
+                log.error("retrieve(" + url + ") on an illegal URL since protocol was not https.");   
+                            throw new IOException("only 'https' URLs are valid for this method");   
+            }  
+if (!u.getProtocol().equals("https")){  
+                // IOException may not be the best exception we could throw here  
+                // since the problem is with the URL argument we were passed, not  
+                // IO. -awp9  
+                log.error("retrieve(" + url + ") on an illegal URL since protocol was not https.");  
+                            throw new IOException("only 'https' URLs are valid for this method");  
+            }  
+(3).客户端filter, 所有https://localhost:8443/cas更改为 http://localhost:8080/cas
+===========================================================================
+CAS去掉HTTPS认证
+如何去掉HTTPS认证？ 
+说明：默认情况下HTTP也是可以访问CAS SERVER的，但认证，登陆，退出等操作均没有任何的效果。所以必须作出下面的修改 
+1、进入WEB-INF\spring-configuration目录 
+　　打开warnCookieGenerator.xml文件 修改p:cookieSecure的值为false 
+2、打开ticketGrantingTicketCookieGenerator.xml文件 
+　　同样修改p:cookieSecure的值为false 
+3、打开WEB-INF\deployerConfigContext.xml文件 
+　　查找org.jasig.cas.authentication.handler.support.HttpBasedServiceCredentialsAuthenticationHandler 
+　　把这代码块修改为如下： 
+<bean class="org.jasig.cas.authentication.handler.support.HttpBasedServiceCredentialsAuthenticationHandler"
+                    p:httpClient-ref="httpClient" p:requireSecure="false" />
+ p:requireSecure=”false”为新添加的
+4、客户端filter  
+　　所有https://localhost:8443/cas   更改为 http://localhost:8080/cas
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+
+
+
+
+
+
+
+
+
