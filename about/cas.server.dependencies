@@ -1,0 +1,90 @@
+cas-server-integration:
+
+GroupId	ArtifactId	Latest Version	Updated	Download 
+org.jasig.cas	cas-server-integration-restlet	4.0.1  all (42)	12-Jan-2015	pom  jar  javadoc.jar  sources.jar  
+org.jasig.cas	cas-server-integration-ehcache	4.0.1  all (14)	12-Jan-2015	pom  jar  javadoc.jar  sources.jar  
+org.jasig.cas	cas-server-integration-memcached	4.0.1  all (41)	12-Jan-2015	pom  jar  javadoc.jar  sources.jar  
+org.jasig.cas	cas-server-integration-jboss	4.0.1  all (61)	12-Jan-2015	pom  jar  javadoc.jar  sources.jar  
+
+		<dependency>
+		    <groupId>org.jasig.cas</groupId>
+		    <artifactId>cas-server-integration-restlet</artifactId>
+		    <version>${cas.server.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jasig.cas</groupId>
+		    <artifactId>cas-server-integration-ehcache</artifactId>
+		    <version>${cas.server.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jasig.cas</groupId>
+		    <artifactId>cas-server-integration-memcached</artifactId>
+		    <version>${cas.server.version}</version>
+		</dependency>
+
+cas-server-support:
+
+GroupId	ArtifactId	Latest Version	Updated	Download
+org.jasig.cas	cas-server-support-saml	4.0.1  all (6)	12-Jan-2015	pom  jar  javadoc.jar  sources.jar  
+org.jasig.cas	cas-server-support-pac4j	4.0.1  all (6)	12-Jan-2015	pom  jar  javadoc.jar  sources.jar  
+org.jasig.cas	cas-server-support-oauth	4.0.1  all (14)	12-Jan-2015	pom  jar  javadoc.jar  sources.jar  
+org.jasig.cas	cas-server-support-x509	4.0.1  all (63)	12-Jan-2015	pom  jar  javadoc.jar  sources.jar  
+org.jasig.cas	cas-server-support-trusted	4.0.1  all (62)	12-Jan-2015	pom  jar  javadoc.jar  sources.jar  
+org.jasig.cas	cas-server-support-spnego	4.0.1  all (61)	12-Jan-2015	pom  jar  javadoc.jar  sources.jar  
+org.jasig.cas	cas-server-support-radius	4.0.1  all (63)	12-Jan-2015	pom  jar  javadoc.jar  sources.jar  
+org.jasig.cas	cas-server-support-openid	4.0.1  all (61)	12-Jan-2015	pom  jar  javadoc.jar  sources.jar  
+org.jasig.cas	cas-server-support-ldap	4.0.1  all (63)	12-Jan-2015	pom  jar  javadoc.jar  sources.jar  
+org.jasig.cas	cas-server-support-legacy	4.0.1  all (63)	12-Jan-2015	pom  jar  javadoc.jar  sources.jar  
+org.jasig.cas	cas-server-support-jdbc	4.0.1  all (63)	12-Jan-2015	pom  jar  javadoc.jar  sources.jar  
+org.jasig.cas	cas-server-support-generic	4.0.1  all (63)	12-Jan-2015	pom  jar  javadoc.jar  sources.jar  
+
+		<dependency>
+		    <groupId>org.jasig.cas</groupId>
+		    <artifactId>cas-server-support-saml</artifactId>
+		    <version>${cas.server.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jasig.cas</groupId>
+		    <artifactId>cas-server-support-pac4j</artifactId>
+		    <version>${cas.server.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jasig.cas</groupId>
+		    <artifactId>cas-server-support-oauth</artifactId>
+		    <version>${cas.server.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jasig.cas</groupId>
+		    <artifactId>cas-server-support-x509</artifactId>
+		    <version>${cas.server.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jasig.cas</groupId>
+		    <artifactId>cas-server-support-trusted</artifactId>
+		    <version>${cas.server.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jasig.cas</groupId>
+		    <artifactId>cas-server-support-spnego</artifactId>
+		    <version>${cas.server.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jasig.cas</groupId>
+		    <artifactId>cas-server-support-radius</artifactId>
+		    <version>${cas.server.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jasig.cas</groupId>
+		    <artifactId>cas-server-support-openid</artifactId>
+		    <version>${cas.server.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jasig.cas</groupId>
+		    <artifactId>cas-server-support-ldap</artifactId>
+		    <version>${cas.server.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jasig.cas</groupId>
+		    <artifactId>cas-server-support-legacy</artifactId>
+		    <version>${cas.server.version}</version>
+		</dependency>

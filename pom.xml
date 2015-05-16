@@ -15,6 +15,9 @@
     <description>The HunnyHu's customizations to the JA-SIG CAS server.</description>
     <properties>
 		<cas.server.version>4.0.1</cas.server.version>
+		<maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
+		<maven.compiler.plugin.source>1.5</maven.compiler.plugin.source>
+		<maven.compiler.plugin.target>1.5</maven.compiler.plugin.target>
 	</properties>
     <dependencies>
         <dependency>
@@ -23,51 +26,57 @@
             <version>${cas.server.version}</version>
             <type>war</type>
         </dependency>
- 
         <dependency>
             <groupId>org.jasig.cas</groupId>
             <artifactId>cas-server-core</artifactId>
             <version>${cas.server.version}</version>
         </dependency>
- 
-        <!-- if you need LDAP handler -->
-        <!-- <dependency>
-            <groupId>org.jasig.cas</groupId>
-            <artifactId>cas-server-support-ldap</artifactId>
-            <version>3.1.1</version>
-        </dependency> -->
- 
-        <!-- if you need X509 handler -->
-        <!-- <dependency>
-            <groupId>org.jasig.cas</groupId>
-            <artifactId>cas-server-support-x509</artifactId>
-            <version>3.1.1</version>
-        </dependency> -->
- 		<!-- <dependency>
-		    <groupId>org.apache.maven.plugins</groupId>
-		    <artifactId>maven-compiler-plugin</artifactId>
-		    <version>3.3</version>
-		</dependency> -->
-      </dependencies>
+        <dependency>
+		    <groupId>org.jasig.cas</groupId>
+		    <artifactId>cas-server-webapp-support</artifactId>
+		    <version>${cas.server.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jasig.cas</groupId>
+			<artifactId>cas-server-support-jdbc</artifactId>
+			<version>${cas.server.version}</version>
+		</dependency>
+				<dependency>
+		    <groupId>org.jasig.cas</groupId>
+		    <artifactId>cas-server-integration-restlet</artifactId>
+		    <version>${cas.server.version}</version>
+		</dependency>
+    </dependencies>
     <build>
         <finalName>cas</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
+                <version>${maven.compiler.plugin.version}</version>
                 <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
+                    <source>${maven.compiler.plugin.source}</source>
+                    <target>${maven.compiler.plugin.target}</target>
                 </configuration>
             </plugin>
         </plugins>
     </build>
     <repositories>
         <repository>
-            <id>jasig-repository</id>
-            <name>JA-SIG Maven2 Repository</name>
-            <url>http://developer.ja-sig.org/maven2</url>
-        </repository>
+			<id>jasig-repository</id>
+			<name>JA-SIG Maven2 Repository</name>
+			<url>http://developer.ja-sig.org/maven2</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>maven2-central</id>
+			<name>Maven2 Repository</name>
+			<url>https://repo1.maven.org/maven2</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
     </repositories>
     <reporting>
         <plugins>

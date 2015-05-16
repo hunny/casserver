@@ -1,3 +1,5 @@
+============================================================================
+1. Maintaining Local Customization Using Maven2
 https://wiki.jasig.org/display/CASUM/Maintaining+local+customizations+using+Maven+2
 
 mvn -e -Dmaven.test.skip=true package install
@@ -5,7 +7,8 @@ mvn -e -Dmaven.test.skip=true package install
 https://wiki.jasig.org/display/CASUM/Maintaining+local+customizations+using+Maven+2
 
 Background 
-This page is created in order to let users share how to maintain local customizations using Maven 2. Those customizations include:
+This page is created in order to let users share how to maintain local customizations using Maven 2. 
+Those customizations include:
 
    * changing properties in deploymentConfigContext.xml, cas-servlet.xml, etc.;
    * adding customized views and themes;
@@ -114,7 +117,8 @@ Then create a pom.xml file like this in your new directory:
     </reporting>
 </project>
 Replace XXX by your organisation name and remove the X509 or the LDAP lines if you don't need these handlers.
-Now you can put your own customized files in cas-server-3.1.1/cas-server-xxx/src/. For example if you want to overload the X509 handler sourcecode, create this file:
+Now you can put your own customized files in cas-server-3.1.1/cas-server-xxx/src/. 
+For example if you want to overload the X509 handler sourcecode, create this file:
 
 cas-server-xxx/src/main/java/X509CredentialsAuthenticationHandler.java
 
@@ -123,4 +127,11 @@ Then you just have to compile your project:
 cd cas-server-3.1.1/cas-server-xxx/
 mvn -Dmaven.test.skip=true package install
 The war will be available in cas-server-3.1.1/cas-server-xxx/target/cas.war
-Another way that is not explained above that need to be explained is: Install the cas.war into local repository. Build your own customization project using Maven 2, include the cas.war as a dependency
+Another way that is not explained above that need to be explained is: Install the cas.war into local repository. 
+Build your own customization project using Maven 2, include the cas.war as a dependency
+
+============================================================================
+2. Convert Image to favicon.ico
+ico generate address: http://www.favicon.cc/
+
+============================================================================
