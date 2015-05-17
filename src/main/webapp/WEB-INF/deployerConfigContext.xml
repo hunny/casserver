@@ -61,7 +61,8 @@
                    | set its name to something other than its default name (typically the simple class name).
                    -->
                 <entry key-ref="proxyAuthenticationHandler" value-ref="proxyPrincipalResolver" />
-                <entry key-ref="primaryAuthenticationHandler" value-ref="primaryPrincipalResolver" />
+                <!-- <entry key-ref="primaryAuthenticationHandler" value-ref="primaryPrincipalResolver" /> -->
+                <entry key-ref="jdbcAuthenticationHandler" value-ref="jdbcPrincipalResolver" />
             </map>
         </constructor-arg>
 
@@ -113,6 +114,48 @@
             </map>
         </property>
     </bean>
+    <bean id="mysqlDataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://localhost:4306/sweb?useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true</value>
+		</property>
+		<property name="username">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>mysqlpasswd</value>
+		</property>
+    </bean>
+    <bean id="passwordEncoder" class="hh.hunnyhu.cas.authentication.handler.HunnyHuPasswordEncoder" autowire="byName" />
+ 	<bean id="jdbcAuthenticationHandler" class="org.jasig.cas.adaptors.jdbc.QueryDatabaseAuthenticationHandler">
+		<property name="dataSource" ref="mysqlDataSource" />
+		<property name="sql" value="select password from t_user_info where lower(username) = lower(?)" />
+		<property name="passwordEncoder" ref="passwordEncoder" />
+	</bean>
+	<bean id="jdbcPrincipalResolver"
+          class="org.jasig.cas.authentication.principal.PersonDirectoryPrincipalResolver" >
+        <property name="attributeRepository" ref="jdbcAttributeRepository" />
+    </bean>
+    <bean id="jdbcAttributeRepository" class="org.jasig.services.persondir.support.jdbc.SingleRowJdbcPersonAttributeDao">
+		<constructor-arg index="0" ref="mysqlDataSource" />
+		<constructor-arg index="1" value="select * from t_user_info where {0}" />
+		<property name="queryAttributeMapping">
+			<map>
+				<!-- 这里的key需写username，value对应数据库用户名字段  -->
+				<entry key="username" value="username" />
+			</map>
+		</property>
+		<property name="resultAttributeMapping">
+			<map>
+				<!--key为对应的数据库字段名称，value为提供给客户端获取的属性名字，系统会自动填充值 -->
+				<entry key="id" value="id" />
+				<entry key="username" value="username" />
+				<entry key="nick_name" value="nickname" />
+			</map>
+		</property>
+	</bean>
 
     <!-- Required for proxy ticket mechanism -->
     <bean id="proxyPrincipalResolver"

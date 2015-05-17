@@ -15,6 +15,8 @@
     <description>The HunnyHu's customizations to the JA-SIG CAS server.</description>
     <properties>
 		<cas.server.version>4.0.1</cas.server.version>
+		<mysql.connector.version>5.1.35</mysql.connector.version>
+		<commons.dbcp2.version>2.1</commons.dbcp2.version>
 		<maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
 		<maven.compiler.plugin.source>1.5</maven.compiler.plugin.source>
 		<maven.compiler.plugin.target>1.5</maven.compiler.plugin.target>
@@ -45,6 +47,17 @@
 		    <groupId>org.jasig.cas</groupId>
 		    <artifactId>cas-server-integration-restlet</artifactId>
 		    <version>${cas.server.version}</version>
+		</dependency>
+		<!-- 数据库驱动包 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.connector.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-dbcp2</artifactId>
+		    <version>${commons.dbcp2.version}</version>
 		</dependency>
     </dependencies>
     <build>

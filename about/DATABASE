@@ -1,0 +1,13 @@
+
+CREATE TABLE t_user_info (
+        ID bigint NOT NULL AUTO_INCREMENT COMMENT '用户编号', 
+        USERNAME varchar(255) COMMENT '用户名', 
+        NICK_NAME varchar(255) COMMENT '昵称', 
+        PASSWORD varchar(255) COMMENT '密码', 
+        FLAG_DELETED varchar(1) COMMENT '删除标识', 
+        USER_CREATED bigint COMMENT '创建人', 
+        DATE_CREATED datetime COMMENT '创建时间', 
+        USER_UPDATED bigint COMMENT '更新人', 
+        LAST_UPDATED datetime COMMENT '更新时间', 
+        PRIMARY KEY (ID), CONSTRAINT USERNAME UNIQUE (USERNAME)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
